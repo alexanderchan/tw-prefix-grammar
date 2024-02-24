@@ -9,8 +9,8 @@
   ],
   "repository": {
     "todo-keyword": {
-      "match": "(tw-|gd.*?-)",
-      "name": "keyword.todo"
+      "match": "(tw.*?|gd.*?)-",
+      "name": "keyword.twprefix"
     }
   }
 }
