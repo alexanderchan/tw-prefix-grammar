@@ -25,11 +25,7 @@
     "commands": [
       {
         "command": "prefixclass.changePrefixFromString",
-        "title": "Prefix tailwind classes in a string"
-      },
-      {
-        "command": "prefixclass.changePrefixFromHtml",
-        "title": "Prefix tailwind classes in html"
+        "title": "Prefix tailwind classes in selection"
       }
     ],
     "grammars": [

@@ -116,30 +116,7 @@ function changePrefix({
   let selection = editor.selection
   let text = document.getText(selection)
 
-  let classNames = text.match(
-    /(?<=class(?:Name)?=\{?.*["`'])(.*?)(?=["`'])\}?/g
-  )
-  let newText = ''
-  switch (type) {
-    case 'string': // from string
-      // newText = convertToClassName(text, prefix)
-      newText = simpleCodeReplacer({ code: text, prefix })
-      break
-    case 'html': // from html
-      if (!classNames) {
-        return
-      }
-      classNames.forEach((className) => {
-        let newClass = convertToClassName({ name: className, prefix })
-        // let newClass = replaceClassesWithPrefix({ classes: className, prefix })
-        // replace old class name with new class name
-        text = text.replace(className, newClass)
-      })
-      newText = text
-      break
-    default:
-      newText = text
-  }
+  let newText = simpleCodeReplacer({ code: text, prefix })
 
   editor.edit((builder: vscode.TextEditorEdit) => {
     builder.replace(selection, newText)
@@ -162,10 +139,15 @@ export function activate(context: vscode.ExtensionContext) {
     'prefixclass.changePrefixFromString',
     () => {
       vscode.window
-        .showInputBox({ prompt: `Enter new prefix for:`, value: lastPrefix })
+        .showInputBox({
+          prompt: `Enter new prefix (including a dash -):`,
+          value: lastPrefix,
+        })
         .then((prefix: string | undefined) => {
-          lastPrefix = prefix || lastPrefix
-          changePrefix({ prefix, type: 'string' })
+          if (prefix) {
+            lastPrefix = prefix || lastPrefix
+            changePrefix({ prefix, type: 'string' })
+          }
         })
     }
   )
