@@ -1,0 +1,26 @@
+{
+  "name": "tw-prefix-grammar",
+  "displayName": "tw-prefix-grammar",
+  "description": "auto highlights prefixes",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.86.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "grammars": [
+      {
+        "scopeName": "tw-prefix.injection",
+        "path": "./syntaxes/injection.json",
+        "injectTo": [
+          "source.jsx",
+          "source.js",
+          "source.ts",
+          "source.tsx"
+        ]
+      }
+    ]
+  }
+}

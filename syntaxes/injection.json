@@ -1,0 +1,16 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "scopeName": "tw-prefix.injection",
+  "injectionSelector": "L:string.quoted.single, L:string.template, L:string.quoted.double, L:comment",
+  "patterns": [
+    {
+      "include": "#todo-keyword"
+    }
+  ],
+  "repository": {
+    "todo-keyword": {
+      "match": "(tw-|gd.*?-)",
+      "name": "keyword.todo"
+    }
+  }
+}
