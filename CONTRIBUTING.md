@@ -14,3 +14,7 @@ Open this folder in vscode and run with `F5` to open a test instance.
 $ pnpm run package
 $ pnpm run install:vscode # test local install
 ```
+
+## Adding to vscode store
+
+It's easier to just upload via the manage extension https://marketplace.visualstudio.com/manage/publishers ui if not updating frequently or via ci/cd.
