@@ -21,9 +21,10 @@ To use this extension, follow these steps:
 
 ## Customize the syntax highlighting
 
-cmd-shift-p then open `Preferences: Open User Settings(JSON)` and add or update the section and customize with your colors:
+cmd-shift-p then open `Preferences: Open User Settings(JSON)` and add or update the section and customize with your colors or choice of prefix. Update the setting per workspace.
 
 ```
+ "tailwindPrefixer.prefix": "tw-",
  "editor.tokenColorCustomizations": {
     "[*Light*]": {
       "textMateRules": [
@@ -54,20 +55,12 @@ This is a grammar injection rather than a language server because it is very fas
 
 ## Future enhancements
 
-Add a workspace setting to default the prefix or read it from the tailwind config.
+Add way to read prefix from the tailwind config.
 
 ## References
 
 - [syntax highlight guide](https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide)
 - [color themes](https://code.visualstudio.com/api/extension-guides/color-theme#syntax-colors)
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release
 
 ## For more information
 
