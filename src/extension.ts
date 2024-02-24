@@ -122,7 +122,7 @@ function changePrefix({
   })
 }
 
-let lastPrefix = 'tw-'
+let lastPrefix = ''
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -133,10 +133,14 @@ export function activate(context: vscode.ExtensionContext) {
   let fromString = vscode.commands.registerCommand(
     'prefixclass.changePrefixFromString',
     () => {
+      const configPrefix = vscode.workspace
+        .getConfiguration('tailwindPrefixer')
+        .get('prefix', 'tw-')
+
       vscode.window
         .showInputBox({
           prompt: `Enter new prefix (including a dash -):`,
-          value: lastPrefix,
+          value: lastPrefix || configPrefix,
         })
         .then((prefix: string | undefined) => {
           if (prefix) {
@@ -147,19 +151,7 @@ export function activate(context: vscode.ExtensionContext) {
     }
   )
 
-  let fromHtml = vscode.commands.registerCommand(
-    'prefixclass.changePrefixFromHtml',
-    () => {
-      vscode.window
-        .showInputBox({ prompt: `Enter new prefix for:`, value: lastPrefix })
-        .then((prefix: string | undefined) => {
-          lastPrefix = prefix || lastPrefix
-          changePrefix({ prefix, type: 'html' })
-        })
-    }
-  )
-
-  const subscriptions = [fromString, fromHtml]
+  const subscriptions = [fromString]
 
   context.subscriptions.push(...subscriptions)
 }

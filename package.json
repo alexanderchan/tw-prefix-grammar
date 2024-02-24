@@ -1,6 +1,6 @@
 {
   "name": "tw-prefix-grammar",
-  "displayName": "Tailwind Classname Prefixer",
+  "displayName": "Tailwind Prefixer",
   "description": "Adds a tw-prefix grammar and prefixer command for tw classes",
   "icon": "images/icon-128x128.webp",
   "galleryBanner": {
@@ -29,7 +29,7 @@
     "build": "esbuild ./src/extension.ts --bundle --outfile=./dist/extension.js --platform=node --format=cjs --external:vscode --sourcemap",
     "esbuild-watch": "npm run build -- --sourcemap --watch",
     "package": "rimraf dist/ && npm run build && vsce package -o dist/",
-    "vscode:install": "code --install-extension dist/tw-prefix-grammar-0.0.1.vsix"
+    "vscode:install": "tsx ./scripts/copy-to-local.ts"
   },
   "activationEvents": [],
   "contributes": {
@@ -50,15 +50,25 @@
           "source.tsx"
         ]
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Tailwind Prefixer",
+      "properties": {
+        "tailwindPrefixer.prefix": {
+          "type": "string",
+          "default": "tw-",
+          "markdownDescription": "The prefix to be added to classes"
+        }
+      }
+    }
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.2",
     "@types/glob": "^8.1.0",
-    "@types/node": "16.x",
+    "@types/node": "~16.18.68",
     "@types/vscode": "^1.77.0",
     "@vscode/vsce": "^2.24.0",
-    "rimraf": "^5.0.1"
-  },
-  "dependencies": {}
+    "rimraf": "^5.0.1",
+    "zx": "^7.2.3"
+  }
 }
