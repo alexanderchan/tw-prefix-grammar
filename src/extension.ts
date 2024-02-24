@@ -69,34 +69,6 @@ export function simpleCodeReplacer({
   return replacedString
 }
 
-function convertToClassName({
-  name,
-  prefix,
-}: {
-  name: string
-  prefix: string
-}) {
-  let result = name
-    .split(' ')
-    .map((className: string) => {
-      if (className.includes(prefix)) {
-        return className
-      }
-
-      if (className.includes(':')) {
-        // get last part of class name
-        let lastPart = className.split(':').pop()
-        if (lastPart && !lastPart.startsWith(prefix)) {
-          return className.replace(lastPart, prefix + lastPart)
-        }
-      }
-      return prefix + className
-    })
-    .join(' ')
-
-  return result
-}
-
 // should try to read this from the tw config file
 // the same way that the tailwindcss intellisense does
 function changePrefix({

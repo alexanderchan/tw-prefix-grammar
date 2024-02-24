@@ -8,21 +8,21 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+          "tw-bg-primary tw-text-primary-foreground tw-shadow hover:tw-bg-primary/90",
         destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+          "tw-bg-destructive tw-text-destructive-foreground tw-shadow-sm hover:tw-bg-destructive/90",
         outline:
-          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+          "tw-border tw-border-input tw-bg-background tw-shadow-sm hover:tw-bg-accent hover:tw-text-accent-foreground",
         secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+          "tw-bg-secondary tw-text-secondary-foreground tw-shadow-sm hover:tw-bg-secondary/80",
+        ghost: "hover:tw-bg-accent hover:tw-text-accent-foreground",
+        link: "tw-text-primary tw-underline-offset-4 hover:tw-underline",
       },
       size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-8",
-        icon: "h-9 w-9",
+        default: "tw-h-9 tw-px-4 tw-py-2",
+        sm: "tw-h-8 tw-rounded-md tw-px-3 tw-text-xs",
+        lg: "tw-h-10 tw-rounded-md tw-px-8",
+        icon: "tw-h-9 tw-w-9",
       },
     },
     defaultVariants: {
