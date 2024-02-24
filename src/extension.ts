@@ -2,22 +2,96 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode'
 
-function convertToClassName(name: string, prefix: string) {
+export function replaceClassesWithPrefix({
+  classes,
+  prefix,
+}: {
+  classes: string
+  prefix: string
+}) {
+  if (!classes) {
+    return ''
+  }
+
+  // split the classes at the space
+  const splitClasses = classes?.split(' ')
+
+  // add the prefix to the classes that don't have it
+  const classesWithPrefixAdded = splitClasses.map((c) => {
+    // ignore if it already has the prefix
+    if (c.includes(prefix)) {
+      return c
+    }
+
+    // modifiers need the replacement after the modifier
+    if (c.includes(':')) {
+      const [modifier, replacement] = c.split(':')
+      return modifier + ':' + prefix + replacement
+    }
+
+    // starts with a quote
+    if (/^['`"]/.test(c)) {
+      return c.replace(/(['`"])(.*)/, `$1${prefix}$2`)
+    }
+
+    if (c.startsWith(prefix)) {
+      return c
+    } else {
+      return prefix + c
+    }
+  })
+  // join the classes back together
+
+  return classesWithPrefixAdded.join(' ')
+}
+
+export function simpleCodeReplacer({
+  code,
+  prefix,
+}: {
+  code: string
+  prefix: string
+}) {
+  // Input string
+  // Regular expression to match contents between quotes, backticks, or single quotes
+  const regex = /["`'](.*?)["'`]/gim
+  const inputString = code
+
+  console.log({ code })
+  // Replacement function
+  const replacedString = inputString.replace(regex, (match, captureGroup) => {
+    // Replace captured group with desired replacement
+    return replaceClassesWithPrefix({
+      classes: match,
+      prefix,
+    })
+  })
+
+  return replacedString
+}
+
+function convertToClassName({
+  name,
+  prefix,
+}: {
+  name: string
+  prefix: string
+}) {
   let result = name
     .split(' ')
-    .map((c: string) => {
-      if (c.includes(prefix)) {
-        return c
+    .map((className: string) => {
+      if (className.includes(prefix)) {
+        return className
       }
 
-      if (c.includes(':')) {
+      if (className.includes(':')) {
         // get last part of class name
-        let lastPart = c.split(':').pop()
+        let lastPart = className.split(':').pop()
         if (lastPart && !lastPart.startsWith(prefix)) {
-          return c.replace(lastPart, prefix + lastPart)
+          return className.replace(lastPart, prefix + lastPart)
         }
       }
-      return prefix + c
+      return prefix + className
     })
     .join(' ')
 
@@ -28,10 +102,10 @@ function convertToClassName(name: string, prefix: string) {
 // the same way that the tailwindcss intellisense does
 function changePrefix({
   prefix = 'tw-',
-  type = 0,
+  type = 'string',
 }: {
   prefix?: string
-  type?: number
+  type?: 'string' | 'html'
 }) {
   let editor = vscode.window.activeTextEditor
   if (!editor) {
@@ -42,20 +116,24 @@ function changePrefix({
   let selection = editor.selection
   let text = document.getText(selection)
 
-  let className = text.match(/(?<=class(?:Name)?=")(.*?)(?=")/g)
+  let classNames = text.match(
+    /(?<=class(?:Name)?=\{?.*["`'])(.*?)(?=["`'])\}?/g
+  )
   let newText = ''
   switch (type) {
-    case 0: // from string
-      newText = convertToClassName(text, prefix)
+    case 'string': // from string
+      // newText = convertToClassName(text, prefix)
+      newText = simpleCodeReplacer({ code: text, prefix })
       break
-    case 1: // from html
-      if (!className) {
+    case 'html': // from html
+      if (!classNames) {
         return
       }
-      className.forEach((s: string) => {
-        let newClass = convertToClassName(s, prefix)
+      classNames.forEach((className) => {
+        let newClass = convertToClassName({ name: className, prefix })
+        // let newClass = replaceClassesWithPrefix({ classes: className, prefix })
         // replace old class name with new class name
-        text = text.replace(s, newClass)
+        text = text.replace(className, newClass)
       })
       newText = text
       break
@@ -87,7 +165,7 @@ export function activate(context: vscode.ExtensionContext) {
         .showInputBox({ prompt: `Enter new prefix for:`, value: lastPrefix })
         .then((prefix: string | undefined) => {
           lastPrefix = prefix || lastPrefix
-          changePrefix({ prefix, type: 0 })
+          changePrefix({ prefix, type: 'string' })
         })
     }
   )
@@ -99,7 +177,7 @@ export function activate(context: vscode.ExtensionContext) {
         .showInputBox({ prompt: `Enter new prefix for:`, value: lastPrefix })
         .then((prefix: string | undefined) => {
           lastPrefix = prefix || lastPrefix
-          changePrefix({ prefix, type: 1 })
+          changePrefix({ prefix, type: 'html' })
         })
     }
   )

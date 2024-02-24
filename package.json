@@ -49,9 +49,8 @@
     "@types/glob": "^8.1.0",
     "@types/node": "16.x",
     "@types/vscode": "^1.77.0",
-    "@vscode/vsce": "^2.24.0"
-  },
-  "dependencies": {
+    "@vscode/vsce": "^2.24.0",
     "rimraf": "^5.0.1"
-  }
+  },
+  "dependencies": {}
 }
