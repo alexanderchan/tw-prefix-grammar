@@ -9,7 +9,29 @@
   "categories": [
     "Programming Languages"
   ],
+  "main": "./dist/extension.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexanderchan/tw-prefix-grammar"
+  },
+  "scripts": {
+    "build": "esbuild ./src/extension.ts --bundle --outfile=./dist/extension.js --platform=node --format=cjs --external:vscode --sourcemap",
+    "esbuild-watch": "npm run build -- --sourcemap --watch",
+    "package": "rimraf dist/ && npm run build && vsce package -o dist/",
+    "vscode:install": "code --install-extension dist/tw-prefix-grammar-0.0.1.vsix"
+  },
+  "activationEvents": [],
   "contributes": {
+    "commands": [
+      {
+        "command": "prefixclass.changePrefixFromString",
+        "title": "Prefix tailwind classes in a string"
+      },
+      {
+        "command": "prefixclass.changePrefixFromHtml",
+        "title": "Prefix tailwind classes in html"
+      }
+    ],
     "grammars": [
       {
         "scopeName": "tw-prefix.injection",
@@ -22,5 +44,14 @@
         ]
       }
     ]
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.77.0",
+    "@vscode/vsce": "^2.24.0"
+  },
+  "dependencies": {
+    "rimraf": "^5.0.1"
   }
 }

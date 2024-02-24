@@ -4,7 +4,14 @@ This adds a tailwind prefix grammar to search for tw prefixes in any string or t
 
 ## Features
 
-This adds
+This adds a `keyword.twprefix` to the grammar so it can be highlighted in any string or string template. It currently only matches `tw*-` and `gd-*`
+
+## Local installation
+
+```
+$ pnpm run package
+$ pnpm run install:vscode
+```
 
 ## Customize the syntax highlighting
 
@@ -35,20 +42,14 @@ cmd-shift-p then open `Preferences: Open User Settings(JSON)` and add or update 
   }
 ```
 
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-- `myExtension.enable`: Enable/disable this extension.
-- `myExtension.thing`: Set to `blah` to do something.
-
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+This is a grammar injection rather than a language server because it is very fast to create. If you need your own prefixes, customize `syntaxes/injection.json` and add them there.
+
+## References
+
+- [syntax highlight guide](https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide)
+- [color themes](https://code.visualstudio.com/api/extension-guides/color-theme#syntax-colors)
 
 ## Release Notes
 
@@ -82,3 +83,9 @@ You can author your README using Visual Studio Code. Here are some useful editor
 - [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
 
 **Enjoy!**
+
+## Credits
+
+Prefix commands are from:
+
+https://github.com/yensubldg/prefix-class-vscode
