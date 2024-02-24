@@ -4,18 +4,26 @@ This adds a tailwind prefix grammar to search for tw prefixes in any string or t
 
 ## Features
 
-This adds a `keyword.twprefix` to the grammar so it can be highlighted in any string or string template. It currently only matches `tw*-` and `gd-*`
+This adds a `keyword.twprefix` to the grammar so it can be highlighted in any string or string template. It currently only matches `tw*-` and `gd-*`.
+
+Adds a command to "Prefix tailwind classes".
 
 ## Local installation
 
-```
+- To start using your extension with Visual Studio Code copy it into the `~/.vscode/extensions` folder and restart Code.
+
+## Install your extension
+
+- To share your extension with the world, read on https://code.visualstudio.com/docs about publishing an extension.
+
+```sh
 $ pnpm run package
-$ pnpm run install:vscode
+$ pnpm run install:vscode # test local install
 ```
 
 ## Customize the syntax highlighting
 
-cmd-shift-p then open `Preferences: Open User Settings(JSON)` and add or update the section:
+cmd-shift-p then open `Preferences: Open User Settings(JSON)` and add or update the section and customize with your colors:
 
 ```
  "editor.tokenColorCustomizations": {
@@ -57,25 +65,7 @@ Users appreciate release notes as you update your extension.
 
 ### 1.0.0
 
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-- Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-- Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-- Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
+Initial release
 
 ## For more information
 
@@ -86,6 +76,6 @@ You can author your README using Visual Studio Code. Here are some useful editor
 
 ## Credits
 
-Prefix commands are from:
+Prefixing commands based on code from:
 
 https://github.com/yensubldg/prefix-class-vscode

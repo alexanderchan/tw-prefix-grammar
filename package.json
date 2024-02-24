@@ -1,13 +1,24 @@
 {
   "name": "tw-prefix-grammar",
-  "displayName": "tw-prefix-grammar",
-  "description": "auto highlights prefixes",
-  "version": "0.0.1",
+  "displayName": "Tailwind Classname Prefixer",
+  "description": "Adds a tw-prefix grammar and prefixer command for tw classes",
+  "icon": "images/icon-128x128.webp",
+  "galleryBanner": {
+    "color": "#0a2c4f",
+    "theme": "dark"
+  },
+  "publisher": "AlexmChan",
+  "version": "1.0.1",
   "engines": {
     "vscode": "^1.86.0"
   },
   "categories": [
-    "Programming Languages"
+    "Programming Languages",
+    "Formatters"
+  ],
+  "extensionKind": [
+    "ui",
+    "workspace"
   ],
   "main": "./dist/extension.js",
   "repository": {
