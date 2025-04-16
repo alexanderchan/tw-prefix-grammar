@@ -6,7 +6,7 @@ It also adds a command to "Prefix tailwind classes".
 
 ![Usage](images/usage.gif)
 
-## Features
+## Features test
 
 ## Usage
 
